@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+model-catalog/
+__pycache__/
+*.py[cod]
+.playwright-cli/

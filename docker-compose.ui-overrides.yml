@@ -1,0 +1,12 @@
+services:
+  litellm:
+    entrypoint: ["/bin/sh", "/opt/litellm-ui-overrides/start_gateway.sh"]
+    command: ["--port", "4000"]
+    volumes:
+      - ./ui-overrides:/opt/litellm-ui-overrides:ro
+      - ./model-catalog:/opt/litellm-model-catalog
+    environment:
+      PYTHONPATH: /opt/litellm-ui-overrides
+      LITELLM_UI_MODEL_CATALOG_PATH: /opt/litellm-model-catalog/catalog.json
+    post_start:
+      - command: ["python", "/opt/litellm-ui-overrides/model_catalog_data.py"]
